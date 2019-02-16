@@ -12,4 +12,5 @@ def readFile():
     filename = str(sys.argv[1])
     file = open(filename, 'r')
     filecontent = file.read().splitlines()
+    file.close()
     return filecontent

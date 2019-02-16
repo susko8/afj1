@@ -74,35 +74,38 @@ while i < fileContent.__len__():
     elif codeline[0] == 'JUMP':
         if fns.getVariable(codeline[1]) == 'problem' and not fns.represents_integer(codeline[1]):
             print('Chyba premenna',codeline[1],'pri JUMP nebola deklarovana')
+            print('Chyba funkcie JUMP na riadku', i - 1, 'program nebol skompilovany')
             break
         if int(fileContent.__len__()) - 1 >= int(codeline[1]) > 0:
             i=int(codeline[1])
         else:
-            print('JUMP riadok nenajdeny')
+            print('JUMP na neexistujuci riadok')
             print('Chyba funkcie JUMP na riadku', i - 1, 'program nebol skompilovany')
             break
         continue
     elif codeline[0] == 'JUMPT':
         if fns.getVariable(codeline[1]) == 'problem' and not fns.represents_integer(codeline[1]):
             print('Chyba premenna',codeline[1],'pri JUMPT nebola deklarovana')
+            print('Chyba funkcie JUMPT na riadku', i - 1, 'program nebol skompilovany')
             break
         if fns.getVariable(codeline[1]):
             if int(fileContent.__len__()) - 1 >= int(codeline[2]) > 0:
                 i = int(codeline[2])
             else:
-                print('JUMPT riadok nenajdeny')
+                print('JUMPT na neexistujuci riadok')
                 print('Chyba funkcie JUMPT na riadku', i - 1, 'program nebol skompilovany')
                 break
         continue
     elif codeline[0] == 'JUMPF':
         if fns.getVariable(codeline[1]) == 'problem' and not fns.represents_integer(codeline[1]):
             print('Chyba premenna',codeline[1],'pri JUMPF nebola deklarovana')
+            print('Chyba funkcie JUMPF na riadku', i - 1, 'program nebol skompilovany')
             break
         if not fns.getVariable(codeline[1]):
             if int(fileContent.__len__()) - 1 >= int(codeline[2]) > 0:
                 i = int(codeline[2])
             else:
-                print('JUMPF riadok nenajdeny')
+                print('JUMPF na neexistujuci riadok')
                 print('Chyba funkcie JUMPF na riadku', i - 1, 'program nebol skompilovany')
                 break
     elif codeline[0] == 'NOP':

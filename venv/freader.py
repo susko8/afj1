@@ -5,7 +5,7 @@ import sys
 
 def readFile():
     if len(sys.argv) == 2:
-        print('Argument ok,\nKompilujem subor:', str(sys.argv[1]), '\n...\n\nVystup:\n')
+        print('Argument ok,\nKompilujem subor:', str(sys.argv[1]), '\nVystup:\n')
     else:
         print('Chyba nespravne spustenie skriptu: zadajte interpreter "meno suboru"')
         sys.exit()

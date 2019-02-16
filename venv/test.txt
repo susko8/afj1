@@ -1,0 +1,4 @@
+READ,i
+==,i,1,podm
+JUMPT,podm,1
+JUMPF,podm,5

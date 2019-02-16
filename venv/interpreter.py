@@ -17,53 +17,100 @@ while i < fileContent.__len__():
     codeline = fileContent[i].split(',')
     i += 1
     if codeline[0] == 'READ':
-        print('read')
+        if not fns.read(codeline):
+            print('Chyba funkcie nacitania premennej na riadku', i - 1, 'program nemoze pokracovat')
+            break
         continue
     elif codeline[0] == 'WRITE':
-        print('write')
+        if not fns.write(codeline):
+            print('Chyba funkcie vypisu premennej na riadku',i-1,'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == '+':
-        print('sucet')
+        if not fns.addition(codeline):
+            print('Chyba funkcie suctu na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == '-':
-        print('rozdiel')
+        if not fns.subtraction(codeline):
+            print('Chyba funkcie rozdielu na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == '*':
-        print('nasobenie')
+        if not fns.multiplication(codeline):
+            print('Chyba funkcie sucinu na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == '<':
-        print('smallerThan')
+        if not fns.smaller_than(codeline):
+            print('Chyba funkcie porovnavanie "<" na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == '>':
-        print('greaterThan')
+        if not fns.greater_than(codeline):
+            print('Chyba funkcie porovnavanie ">" na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
-    elif codeline[0] == '>==':
-        print('greaterThanOrEqual')
+    elif codeline[0] == '>=':
+        if not fns.greater_or_equal_than(codeline):
+            print('Chyba funkcie porovnavanie ">=" na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
-    elif codeline[0] == '<==':
-        print('smallerThanOrEqual')
+    elif codeline[0] == '<=':
+        if not fns.smaller_or_equal_than(codeline):
+            print('Chyba funkcie porovnavanie ">=" na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == '==':
-        print('Equal')
+        if not fns.equal_to(codeline):
+            print('Chyba funkcie porovnavanie ">=" na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == '=':
-        print('Assign')
+        if not fns.assign(codeline):
+            print('Chyba funkcie priradenia premennej "=" na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == 'JUMP':
-        print('jmp')
+        if fns.getVariable(codeline[1]) == 'problem' and not fns.represents_integer(codeline[1]):
+            print('Chyba premenna',codeline[1],'pri JUMP nebola deklarovana')
+            break
+        if int(fileContent.__len__()) - 1 >= int(codeline[1]) > 0:
+            i=int(codeline[1])
+        else:
+            print('JUMP riadok nenajdeny')
+            print('Chyba funkcie JUMP na riadku', i - 1, 'program nebol skompilovany')
+            break
         continue
     elif codeline[0] == 'JUMPT':
-        print('jmpto')
+        if fns.getVariable(codeline[1]) == 'problem' and not fns.represents_integer(codeline[1]):
+            print('Chyba premenna',codeline[1],'pri JUMPT nebola deklarovana')
+            break
+        if fns.getVariable(codeline[1]):
+            if int(fileContent.__len__()) - 1 >= int(codeline[2]) > 0:
+                i = int(codeline[2])
+            else:
+                print('JUMPT riadok nenajdeny')
+                print('Chyba funkcie JUMPT na riadku', i - 1, 'program nebol skompilovany')
+                break
         continue
     elif codeline[0] == 'JUMPF':
-        print('jmpif')
-        continue
+        if fns.getVariable(codeline[1]) == 'problem' and not fns.represents_integer(codeline[1]):
+            print('Chyba premenna',codeline[1],'pri JUMPF nebola deklarovana')
+            break
+        if not fns.getVariable(codeline[1]):
+            if int(fileContent.__len__()) - 1 >= int(codeline[2]) > 0:
+                i = int(codeline[2])
+            else:
+                print('JUMPF riadok nenajdeny')
+                print('Chyba funkcie JUMPF na riadku', i - 1, 'program nebol skompilovany')
+                break
     elif codeline[0] == 'NOP':
-        print('nop')
+        print('')
         continue
     else:
-        print('neznama instrukcia')
-
+        print('neznama instrukcia na riadku',i-1,'chyba program nebol skompilovany')
+        break
 
 
 
